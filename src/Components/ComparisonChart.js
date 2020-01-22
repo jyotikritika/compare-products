@@ -1,4 +1,5 @@
 import React from 'react';
+import StyledCircles from './StyledCircles';
 
 class ComparisonChart extends React.Component {
 
@@ -20,9 +21,10 @@ class ComparisonChart extends React.Component {
                         {
                             const name1 = "color-circle " + item;
                             return(
-                                <div className={name1}>
-                                    {/* {item} */}
-                                </div>
+                                // <div className={name1}>
+                                //     {/* {item} */}
+                                // </div>
+                                <StyledCircles color = {item}/>
                             );
                             
                         })

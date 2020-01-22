@@ -172,22 +172,3 @@ button:focus {
 .frozen {
     background-color: skyblue;
 }
-
-.color-circle {
-    height: 16px;
-    width: 16px;
-    border-radius: 8px;
-    margin-left: 5px;
-}
-
-.green {
-    background-color: green;
-}
-
-.red {
-    background-color: red;
-}
-
-.blue {
-    background-color: skyblue;
-}
