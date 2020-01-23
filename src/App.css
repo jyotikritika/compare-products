@@ -15,7 +15,7 @@ button:focus {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: Verdana;
+    font-family: 'Roboto', sans-serif;
 }
 
 .product-listing {
@@ -44,7 +44,6 @@ button:focus {
  }
 
 .product-visual {
-    order: 1;
     height: 80%;
     width: 100%;
 }
@@ -171,4 +170,77 @@ button:focus {
 
 .frozen {
     background-color: skyblue;
+}
+
+.edit-rows-button {
+    font-size: x-small;
+    color: blue;
+    border: none;
+    text-align: left;
+}
+
+.close-modal-button {
+    position: relative;
+    float: right;
+    margin: 0;
+    top: -10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+
+.edit-attributes-parent {
+    background-color: white;
+    width: 25%;
+}
+
+.edit-attributes-row {
+    text-align: left;
+    font-size: small;
+    padding: 16px;
+    border: none;
+}
+
+.edit-attributes-header {
+    font-size: large;
+}
+
+.edit-attributes-search {
+    background-color: lightgrey;
+    color: grey;
+}
+
+.edit-attributes-apply {
+    background-color: blue;
+    color: white;
+    text-align: center;
+    width: 100%;
+    margin-top: 100px;
+}
+
+.edit-attributes-list-item {
+    padding: 8px;
+    padding-left: 16px;
+}
+
+.checkbox {
+    height: 12px;
+    width: 12px;
+    padding: 0;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    margin-right: 8px;
+}
+
+.checkbox-selected {
+    background-color: blue;
+}
+
+.checkbox-deselected {
+    background-color: white;
 }

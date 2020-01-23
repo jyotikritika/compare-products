@@ -1,9 +1,11 @@
 import React from 'react';
 import '../App.css';
+import Products from '../products.json';
 import ProductCard from './ProductCard';
 import ComparisonChart from './ComparisonChart';
 import Attributes from './Attributes';
-import Products from '../products.json';
+import {Modal} from './Modal';
+import EditAttributes from './EditAttributes';
 
 class App extends React.Component {
    
@@ -15,7 +17,20 @@ class App extends React.Component {
       selectedItems: {},
       countOfSelectedItems: 0,
       compareButtonEnabled: true,
-      showComparisonChart: false
+      showComparisonChart: false,
+      showModal: false,
+      attributes : {
+        "price": true, 
+        "colors" : true, 
+        "condition": true, 
+        "vendors" : false
+      },
+      chartAttributes : {
+        "price": true, 
+        "colors" : true, 
+        "condition": true, 
+        "vendors" : false
+      },
     }
   }
 
@@ -58,7 +73,6 @@ class App extends React.Component {
   }
 
   shouldShowComparisonChart = (count) => {
-    const countOld = this.state.countOfSelectedItems;
     console.log(`should show comparison chart check called for ${count} items`);
     if(count > 1) {
       this.setState({showComparisonChart : true});
@@ -68,10 +82,43 @@ class App extends React.Component {
     }
   }
 
+  editAttributesListButtonClicked = () => {
+    this.setState({showModal: true});
+  }
+
+  closeModalClicked = () => {
+    this.setState({showModal: false});
+  }
+
+  toggleAttribute = (name) => {
+    const listObj = this.state.attributes;
+    listObj[name] = listObj[name] ? false : true;
+    this.setState({attributes: listObj});
+  }
+
+  applyAttributesChangeToChart = () => {
+    const obj = this.state.attributes;
+    this.setState({chartAttributes: obj, showModal: false});
+  }
+
   render() {
     const productList = this.state.products;
     return (
       <div className="App-parent">
+        <Modal show = {this.state.showModal ? "true" : "false"}>
+          <EditAttributes 
+            attributesList={this.state.attributes}
+            toggleAttribute = {(name) => this.toggleAttribute(name)}
+            applyChange = {this.applyAttributesChangeToChart}
+          >
+            <button 
+              className="close-modal-button"
+              onClick = {() => {this.setState({showModal: false})}}
+            >
+              X
+            </button>
+          </EditAttributes>
+        </Modal>
         <div className="product-listing" >
           {productList && productList.map((item) => {
               return <ProductCard 
@@ -92,18 +139,18 @@ class App extends React.Component {
         <div className="product-comparison">
           {(this.state.showComparisonChart) ?
             <div className="comparison-chart-parent">
-              <Attributes />
+              <Attributes 
+                editAttributesListClicked = {this.editAttributesListButtonClicked}
+                attributesList = {this.state.chartAttributes}
+              />
               {productList.map((item) => {
                 if(this.state.selectedItems[item.id]) {
                   return <ComparisonChart 
                     key = {item.id}
-                    name = {item.name}
-                    price = {item.price}
-                    colors = {item.colors}
-                    condition = {item.condition}
-                    vendor = {item.vendors}
+                    product = {item}
+                    attributesList = {this.state.chartAttributes}
                   />
-                }
+                }else return null;
               })}
             </div>
             :

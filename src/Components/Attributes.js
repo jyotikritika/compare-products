@@ -2,31 +2,29 @@ import React from 'react';
 
 class Attributes extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            attributes : {
-                "price": true, 
-                "colors" : true, 
-                "condition": true, 
-                "vendors" : true
-            },
-            attributesDisplayed: false
-        }
-    }
-
     render() {
+        const attributes = this.props.attributesList;
         return(
             <div className="chart-column">
-                <div className="chart-header chart-row-data">Attributes</div>
-                {Object.keys(this.state.attributes).map((key) => 
+                <div className="chart-header chart-row-data">
+                    Attributes
+                    <button 
+                        className="edit-rows-button" 
+                        onClick={this.props.editAttributesListClicked}
+                    >
+                        Edit
+                    </button>
+                </div>
+                {Object.keys(attributes).map((key) => 
                     {
-                        if(this.state.attributes[key] === true) {
+                        if(attributes[key] === true) {
                             return (
                                 <div className="chart-row-attributes chart-row-data">
                                     {key}
                                 </div>
                             );
+                        }else {
+                            return null;
                         }
                     })
                 }

@@ -3,23 +3,16 @@ import StyledCircles from './StyledCircles';
 
 class ComparisonChart extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-           
-        }
-    }
-
     render() {
-        const {name, price, colors, condition, vendor} = this.props;
+        const {product, attributesList} = this.props;
         return(
             <div className="chart-column">
-                <div className="chart-header chart-row-data">{name}</div>
-                <div className="chart-row-data">{price}</div>
-                <div className="chart-row-data">
-                    {colors.map((item) => 
+                <div className="chart-header chart-row-data">{product.name}</div>
+                <div className={attributesList.price ? "chart-row-data" : "chart-row-data-hide"}>{product.price}</div>
+                <div className={attributesList.colors ? "chart-row-data" : "chart-row-data-hide"}>
+                    {product.colors.map((item) => 
                         {
-                            const name1 = "color-circle " + item;
+                            // const name1 = "color-circle " + item;
                             return(
                                 // <div className={name1}>
                                 //     {/* {item} */}
@@ -30,11 +23,11 @@ class ComparisonChart extends React.Component {
                         })
                     }
                 </div>
-                <div className={condition === "Fresh" ? "chart-row-data fresh" : "chart-row-data frozen"}>
-                    {condition}
+                <div className={attributesList.condition ? (product.condition === "Fresh" ? "chart-row-data fresh" : "chart-row-data frozen") : "chart-row-data-hide"}>
+                    {product.condition}
                 </div>
-                <div className="chart-row-data">
-                    {vendor.map((item, i) => {
+                <div className={attributesList.vendors ? "chart-row-data" : "chart-row-data-hide "}>
+                    {product.vendors.map((item, i) => {
                         if(i>0) {
                             return (", " + item)
                         } else {
